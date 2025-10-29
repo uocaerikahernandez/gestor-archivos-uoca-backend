@@ -6,12 +6,10 @@ import { DoctorsModule } from './doctors/doctors.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true, 
+      isGlobal: true,
     }),
     MongooseModule.forRoot(process.env.MONGODB_URI),
-    DoctorsModule,
+    DoctorsModule, 
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}
