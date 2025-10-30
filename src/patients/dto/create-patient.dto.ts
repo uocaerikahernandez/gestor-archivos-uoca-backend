@@ -1,32 +1,32 @@
 import { IsString, IsEmail, IsNotEmpty, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
-import { ApiProperty } from '@nestjs/swagger'; 
+import { ApiProperty } from '@nestjs/swagger'; // 👈 Importa
 
 class ContactInfoDto {
-  @ApiProperty({ example: 'dgomez@clinic.com' })
+  @ApiProperty({ example: 'juanperez@mail.com' })
   @IsEmail()
   email: string;
 
-  @ApiProperty({ example: '+58-414-5556789' })
+  @ApiProperty({ example: '+58-412-1234567' })
   @IsString()
   phone: string;
 }
 
-export class CreateDoctorDto {
-  @ApiProperty({ example: '98765432' })
+export class CreatePatientDto {
+  @ApiProperty({ example: '12345678' })
   @IsString()
   @IsNotEmpty()
   fid_number: string;
 
-  @ApiProperty({ example: 'Dra. Gómez' })
+  @ApiProperty({ example: 'Juan' })
   @IsString()
   @IsNotEmpty()
-  full_name: string;
+  name: string;
 
-  @ApiProperty({ example: 'GOMEZ_MARIA_J' })
+  @ApiProperty({ example: 'Pérez' })
   @IsString()
   @IsNotEmpty()
-  cyclhos_name: string;
+  lastname: string;
 
   @ApiProperty({ type: ContactInfoDto })
   @ValidateNested()

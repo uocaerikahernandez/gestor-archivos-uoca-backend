@@ -8,5 +8,6 @@ import { Doctor, DoctorSchema } from './schema/doctor.schema';
   imports: [MongooseModule.forFeature([{ name: Doctor.name, schema: DoctorSchema }])],
   controllers: [DoctorsController],
   providers: [DoctorsService],
+  exports: [MongooseModule, DoctorsService],
 })
 export class DoctorsModule {}
