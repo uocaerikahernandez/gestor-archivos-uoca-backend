@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Item } from './schema/item.schema';
+import { Item, ItemCategory } from './schema/item.schema';
 import { CreateItemDto } from './dto/create-item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
 
@@ -18,11 +18,24 @@ export class ItemsService {
 
   async create(createItemDto: CreateItemDto): Promise<Item> {
     const item_id = await this.generateNextItemId();
+
+    // Generar mapped_name automáticamente si no viene
+    const mapped_name =
+      createItemDto.mapped_name ||
+      createItemDto.cyclhos_name.charAt(0).toUpperCase() +
+        createItemDto.cyclhos_name.slice(1).toLowerCase();
+
+    // Asignar categoría por defecto si no viene
+    const category = createItemDto.category || ItemCategory.ESTUDIO;
+
     const newItem = new this.itemModel({
       ...createItemDto,
+      mapped_name,
+      category,
       item_id,
       metadata: { created_by: 'system' },
     });
+
     return newItem.save();
   }
 
