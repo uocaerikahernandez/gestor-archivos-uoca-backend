@@ -27,7 +27,7 @@ async function bootstrap() {
     }),
   );
 
-  // ✅ Configuración Swagger
+  // Configuración Swagger
   const config = new DocumentBuilder()
     .setTitle('Gestor Médico UOCA')
     .setDescription('API para gestionar el manejo de archivos médicos en la UOCA 🏥')
