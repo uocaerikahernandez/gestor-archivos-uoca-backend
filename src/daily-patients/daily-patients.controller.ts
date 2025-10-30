@@ -45,8 +45,8 @@ export class DailyPatientsController {
     description: 'Lista de registros diarios obtenida correctamente',
     type: [DailyPatient],
   })
-  findAll(@Query('completed') completed?: boolean) {
-    return this.dailyPatientsService.findAll(completed);
+  findAll() {
+  return this.dailyPatientsService.findAll();
   }
 
   // ✅ Buscar por FID

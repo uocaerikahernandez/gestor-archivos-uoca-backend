@@ -90,6 +90,7 @@ export class DailyPatientsService {
       .exec();
   }
 
+
   async findOne(fid_number: string): Promise<DailyPatient[]> {
     const records = await this.dailyModel
       .find()
