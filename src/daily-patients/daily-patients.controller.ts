@@ -27,6 +27,17 @@ export class DailyPatientsController {
   create(@Body() createDailyPatientDto: CreateDailyPatientDto) {
     return this.dailyPatientsService.create(createDailyPatientDto);
   }
+  // ✅ Crear múltiples registros diarios de pacientes
+  @Post('batch')
+  @ApiOperation({
+    summary: 'Crear múltiples registros diarios de pacientes',
+    description:
+      'Permite crear varios registros diarios de pacientes en una sola solicitud. Cada elemento debe tener el mismo formato que CreateDailyPatientDto.',
+  })
+  createBatch(@Body() dtos: CreateDailyPatientDto[]) {
+    return this.dailyPatientsService.createBatch(dtos);
+  }
+
 
   // ✅ Listar todos los registros diarios con populate
   @Get()

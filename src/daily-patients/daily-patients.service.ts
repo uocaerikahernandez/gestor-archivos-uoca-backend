@@ -193,4 +193,22 @@ export class DailyPatientsService {
 
     return deleted;
   }
+
+  // ✅ Crear múltiples registros diarios (batch)
+  async createBatch(dtos: CreateDailyPatientDto[]): Promise<DailyPatient[]> {
+    const results: DailyPatient[] = [];
+
+    for (const dto of dtos) {
+      try {
+        // Reutilizamos el método create existente para mantener la lógica de validación
+        const created = await this.create(dto);
+        results.push(created);
+      } catch (error) {
+        console.error(`❌ Error creando registro para paciente FID ${dto.patient?.fid_number}:`, error.message);
+      }
+    }
+
+    return results;
+  }
+
 }
