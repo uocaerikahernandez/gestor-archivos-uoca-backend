@@ -9,12 +9,15 @@ import { ItemsModule } from 'src/items/items.module';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: DailyPatient.name, schema: DailyPatientSchema }]),
-    PatientsModule, // 👈 Importa el módulo que exporta su MongooseModule
-    DoctorsModule,
-    ItemsModule,
+    MongooseModule.forFeature([
+      { name: DailyPatient.name, schema: DailyPatientSchema },
+    ]),
+    PatientsModule, 
+    DoctorsModule,  
+    ItemsModule,   
   ],
   controllers: [DailyPatientsController],
   providers: [DailyPatientsService],
+  exports: [DailyPatientsService],
 })
 export class DailyPatientsModule {}
