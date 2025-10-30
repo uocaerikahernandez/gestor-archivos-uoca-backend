@@ -8,6 +8,15 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
 
+   app.enableCors({
+    origin: [
+      'https://gestor-archivos-uoca-backend.onrender.com',
+    ],
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  });
+
   app.setGlobalPrefix('api');
 
   app.useGlobalPipes(
@@ -27,6 +36,7 @@ async function bootstrap() {
     .addTag('patients', 'Gestión de pacientes')
     .addTag('items', 'Gestión de estudios o ítems')
     .addTag('daily-patients', 'Citas diarias de pacientes')
+    .addServer(process.env.BASE_URL || 'http://localhost:3001', 'Servidor activo') 
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
